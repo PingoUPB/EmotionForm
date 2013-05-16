@@ -1,4 +1,6 @@
 EmotionForm::Application.routes.draw do
+  put "questions/answer"
+
   authenticated :user do
     root :to => 'home#index'
   end

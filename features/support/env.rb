@@ -57,3 +57,11 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+# https://github.com/leonid-shevtsov/headless
+if ENV['HEADLESS'] && ENV['HEADLESS'] == "true"
+  headless = Headless.new
+  headless.start
+end
+
+#Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :webkit # if RUBY_PLATFORM.downcase.include?("darwin")
