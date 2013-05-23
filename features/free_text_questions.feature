@@ -7,6 +7,7 @@ Feature: Free Text Questions
     Given I am logged in
     And there exists a free text question named "first free text question"
       
+  @javascript
   Scenario: View free text question
     When I go to the home page
     Then I should see "first free text question"

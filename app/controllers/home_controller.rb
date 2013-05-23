@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @questions = Question.all.desc :name
+    @questions = Question.all.asc :name
   end
 end

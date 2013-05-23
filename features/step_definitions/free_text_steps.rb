@@ -6,14 +6,7 @@ Given(/^there exists a free text question named "(.*?)"$/) do |name|
   Question.create name: name
 end
 
-Then(/^I should see "(.*?)"$/) do |text|
-  page.should have_content text
-end
 
-When(/^I fill in "(.*?)" with "(.*?)"$/) do |field, text|
-  fill_in field, :with => text
-end
-
-When(/^I click the button "(.*?)"$/) do |text|
-  click_button text
+Given(/^the free text question "(.*?)" has an answer "(.*?)"$/) do |question, answer|
+  Question.where(name: question).first.save_answer(answer, User.first)
 end

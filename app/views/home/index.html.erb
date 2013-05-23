@@ -1,12 +1,11 @@
 <h3>Home</h3>
+<%= form_tag questions_answer_path %>
 <% @questions.each do |question| %>
   <p>
-	Question: <%= question.name %>
+	Question: <%= link_to_if current_user.try(:admin), question.name, question %>
 	<br>
-	 <%= form_for question, url: questions_answer_path do |f| %>
-		<input name="answer">
-		<%= f.submit "OK" %>
-	 <% end %>
-	
+	<input name="answers[<%= question.id %>]">
   </p>
 <% end %>
+<%= submit_tag "OK" %>
+</form>

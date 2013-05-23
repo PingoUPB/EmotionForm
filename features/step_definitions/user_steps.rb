@@ -55,6 +55,13 @@ Given /^I am logged in$/ do
   sign_in
 end
 
+Given /^I am logged in as an admin$/ do
+  create_visitor
+  delete_user
+  @user = FactoryGirl.create(:admin, @visitor)
+  sign_in
+end
+
 Given /^I exist as a user$/ do
   create_user
 end
