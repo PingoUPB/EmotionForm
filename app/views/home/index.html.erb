@@ -4,7 +4,8 @@
   <p>
 	Question: <%= link_to_if current_user.try(:admin), question.name, question %>
 	<br>
-	<input name="answers[<%= question.id %>]">
+	<label for="answers_<%= question.id %>">Antwort:</label>
+	<input name="answers[<%= question.id %>]" id="answers_<%= question.id %>">
   </p>
 <% end %>
 <%= submit_tag "OK" %>
