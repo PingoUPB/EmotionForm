@@ -16,6 +16,9 @@ class QuestionsController < ApplicationController
 
   def create
   	@question = Question.new params[:question]
+
+    set_options @question, params[:options]
+
   	if @question.save
   		redirect_to @question, notice: "Die Frage wurde erstellt."
   	else
@@ -29,5 +32,20 @@ class QuestionsController < ApplicationController
 
   def update
   	@question = Question.find params[:id]
+    set_options @question, params[:options]
+
+    if @question.update_attributes params[:question]
+      redirect_to @question, notice: "Die Frage wurde gespeichert."
+    else
+      render action: :edit
+    end
+  end
+
+  protected
+  def set_options(question, options)
+    options_arr = options.split(',').map do |option|
+      option.strip unless option.strip.blank?
+    end
+    question.options = options_arr.compact
   end
 end

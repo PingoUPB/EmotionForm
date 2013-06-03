@@ -2,10 +2,20 @@
 <%= form_tag questions_answer_path %>
 <% @questions.each do |question| %>
   <p>
-	Question: <%= link_to_if current_user.try(:admin), question.name, question %>
+	<strong><%= link_to_if current_user.try(:admin), question.name, question %></strong>
 	<br>
-	<label for="answers_<%= question.id %>">Antwort:</label>
-	<input name="answers[<%= question.id %>]" id="answers_<%= question.id %>">
+	<% if question.type == 'text' %>
+	<input name="answers[<%= question.id %>]" id="answers_<%= question.id %>" placeholder="Antwort">
+	<% else %>
+	<ul class="radio-group clearfix">
+		<% question.options.each do |option| %>
+		<li>
+			<%= radio_button_tag "answers[#{question.id}]", option %>
+			<label><%= option %></label>
+		</li>
+		<% end %>
+	</ul>
+	<% end %>
   </p>
 <% end %>
 <%= submit_tag "OK" %>

@@ -1,4 +1,10 @@
 <%= simple_form_for question do |q| %>
 	<%= q.input :name %>
+	<%= q.input :type, collection: [['Freitext', 'text'], ['Skala', 'scale']], prompt: false %>
+	<div class="control-group string required <%= question.type == 'text'? 'hide': '' %>" id="scale_options">
+	<label for="options">Auswahlmöglichkeiten</label>
+	<%= text_field_tag 'options', question.options.try(:join, ', ') %>
+	<small class="help-block">Bitte Antwortmöglichkeiten mit Komma getrennt angeben</small>
+	</div>
 	<%= q.button :submit %>
 <% end %>
