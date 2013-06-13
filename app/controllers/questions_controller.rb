@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_filter :only_admin, except: :answer
+
   def answer
     params[:answers].each do |key, value|
       Question.find(key).save_answer(value, current_user)
@@ -42,11 +44,7 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    if current_user.admin
-      @questions = Question.all 
-    else
-      redirect_to root_path
-    end
+      @questions = Question.all
   end
 
   def destroy

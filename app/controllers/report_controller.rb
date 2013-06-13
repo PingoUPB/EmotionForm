@@ -1,6 +1,7 @@
 require 'csv'
 
 class ReportController < ApplicationController
+  before_filter :authenticate_user!, :only_admin
 	def to_csv
 		@questions = Question.all
 
