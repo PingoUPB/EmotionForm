@@ -1,6 +1,7 @@
 EmotionForm::Application.routes.draw do
   post "questions/answer"
   resources :questions
+  match "report" => 'report#to_csv'
 
   authenticated :user do
     root :to => 'home#index'
