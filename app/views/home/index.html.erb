@@ -1,4 +1,5 @@
 <h3>Home</h3>
+<% if @questions.any? %>
 <%= form_tag questions_answer_path %>
 <% @questions.each do |question| %>
   <p>
@@ -18,5 +19,8 @@
 	<% end %>
   </p>
 <% end %>
-<%= submit_tag "OK" %>
+<%= submit_tag "OK", class: 'btn btn-primary' %>
 </form>
+<% else %>
+	<p>Es existieren keine Fragen.</p>
+<% end %>

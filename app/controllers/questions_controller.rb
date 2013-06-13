@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
     params[:answers].each do |key, value|
       Question.find(key).save_answer(value, current_user)
     end
-    redirect_to root_path, notice: "Thank you!"
+    redirect_to root_path, notice: "Dankeschön!"
   end
 
   def show
