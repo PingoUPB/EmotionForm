@@ -1,0 +1,19 @@
+<h3>Questions</h3>
+<p> <%= link_to 'Fragen erstellen', new_question_path, class: 'btn' %> </p>
+<table class="table">
+	<tr>
+		<th>Frage</th>
+		<th>Antworten</th>
+		<th>Typ</th>
+		<th>Aktionen</th>
+	</tr>
+	<% @questions.each do |q| %>
+		<tr>
+			<td><%= link_to q.name, q %> </td>
+			<td><%= q.answers.count %></td>
+			<td><%= q.type.humanize  %></td>
+			<td><%= link_to 'Editieren', edit_question_path(q), class: 'btn btn-mini' %> <%= link_to 'Löschen', q, method: 'delete', class: 'btn btn-mini btn-danger', confirm: 'Wollen Sie die Frage wirklich löschen?' %>
+			</td>
+		</tr>
+	<% end %>
+</table>

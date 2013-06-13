@@ -41,6 +41,20 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def index
+    if current_user.admin
+      @questions = Question.all 
+    else
+      redirect_to root_path
+    end
+  end
+
+  def destroy
+    @question = Question.find params[:id]
+    @question.destroy
+    redirect_to questions_path, notice: "Die Frage wurde geloescht."
+  end
+
   protected
   def set_options(question, options)
     options_arr = options.split(',').map do |option|
