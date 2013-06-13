@@ -6,9 +6,11 @@ class ReportController < ApplicationController
 
 		csv_data = CSV.generate do |csv|
 
+			csv << ['Benutzer', 'Zeit', 'Frage', 'Antwort']
+
 			@questions.each do |question|
 				question.answers.each do |answer|
-					csv << [answer.user, answer.created_at, question.name, answer.text]
+					csv << [answer.user.id, answer.created_at, question.name, answer.text]
 				end
 			end
 
