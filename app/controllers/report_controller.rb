@@ -7,11 +7,13 @@ class ReportController < ApplicationController
 
 		csv_data = CSV.generate do |csv|
 
-			csv << ['Benutzer', 'Zeit', 'Frage', 'Antwort']
+			csv << ['Fragen-ID', 'Timestamp ID', 'Benutzer', 'Zeit', 'Frage', 'Antwort']
 
 			@questions.each do |question|
 				question.answers.each do |answer|
-					csv << [answer.user.id, answer.created_at, question.name, answer.text]
+					timestamp_id = Digest::SHA1.hexdigest(answer.created_at.to_s + answer.user.id.to_s)
+
+					csv << [question.id, timestamp_id, answer.user.id, answer.created_at, question.name, answer.text]
 				end
 			end
 
